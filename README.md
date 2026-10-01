@@ -100,6 +100,32 @@ This project was built for personal use with privacy as the primary architectura
 
 ---
 
+## ⚠️ Known Limitations & Engineering Trade-offs
+
+### Why an External Filter Layer (and Not a Re-made Instagram Client)?
+A frequent question is: *Why not simply build a custom, stripped-down Instagram app from scratch?*
+
+1. **Meta's Closed Ecosystem & Private Protocol**: Meta does **not** provide a public API for personal user functionality (direct messages, viewing stories, or feed navigation). The official Instagram Graph API is strictly reserved for business marketing and creator analytics.
+2. **Account Suspension & Ban Risk**: Developing an unofficial Instagram client requires reverse engineering private GraphQL/MQTT endpoints, spoofing mobile device signatures, and extracting session cookies. Meta's anti-fraud machine learning systems actively flag non-official client fingerprints, leading to phone verification checkpoints or permanent account bans.
+3. **The Ban-Proof Compromise**: Operating as an external filter around the official Play Store app via Android's native Accessibility framework is the **only architecture that guarantees your account remains 100% safe from bans**, even though it brings the inherent constraints of an external observer.
+
+---
+
+### Inherent Technical Limitations
+
+Operating outside the Instagram binary comes with specific real-world behaviors:
+
+* **Brief Frame Glances (100–150ms Transient Delay)**:
+  Because Instagram runs as an independent process, when you tap into Reels or Explore, Instagram draws its initial frame before Android broadcasts the accessibility window change event to our service. You may occasionally see a fraction-of-a-second flash of the video before the calm intervention screen appears over it. Eliminating this entirely would require root-level process hooks (like Xposed/LSPosed), which compromises Android system integrity.
+* **UI Mutation & Server-Side A/B Tests**:
+  Meta frequently updates Instagram's UI using dynamic server-side component frameworks (Litho, Bloks, and Jetpack Compose) with obfuscated resource hashes. While the `ScreenClassifier` uses multi-signal heuristic voting (view IDs, content descriptions, hierarchy depth, and child node shapes), brand-new UI variants tested by Instagram may occasionally cause a delay in detection until updated signatures are added.
+* **Fail-Open Policy (Safe Fallback)**:
+  By design, if the classifier cannot determine what screen you are on with at least 60% confidence, it classifies it as `UNKNOWN` and **allows** access. This is an intentional engineering choice: *it is far better for an occasional Reel to slip through than for the app to mistakenly lock you out of an urgent personal message or friend request.*
+* **Aggressive OEM Battery Savers (Realme UI, ColorOS, HyperOS, MIUI)**:
+  Heavily customized Android vendor skins frequently throttle or disconnect Accessibility Services when RAM is tight or after long screen-off intervals. If interventions stop appearing, ensure Instagram Focus has its battery settings set to **"Unrestricted"** and background auto-launch enabled in your phone's app settings.
+
+---
+
 ## Building from Source
 
 ### Prerequisites

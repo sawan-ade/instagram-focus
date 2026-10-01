@@ -110,3 +110,26 @@ This guarantees that app updates or unmapped screens will never mistakenly lock 
 
 * **Target SDK**: Configured for `minSdkVersion 26` (Android 8.0 Oreo) and `targetSdkVersion 34` (Android 14 UpsideDownCake, fully forward-compatible with Android 15 & 16).
 * **Package Signatures**: Signed with modern APK Signature Scheme **v2** and **v3** blocks to pass Play Protect and OEM package installer verifications without triggering deprecated SDK blocks (`INSTALL_FAILED_DEPRECATED_SDK_VERSION`).
+
+---
+
+## 6. Inherent Architectural Limitations & Non-Viability of Custom Clients
+
+### The Sandboxing & Process Isolation Trade-off
+Under Android's Linux security model, `com.instagram.android` and `com.instagramfocus.app` run under distinct, isolated user IDs (UIDs). 
+
+1. **Reactive vs. Preemptive Intervention**:
+   Because Instagram Focus is not injected into Instagram's ART runtime (which would require root access via LSPosed/Magisk and invalidate SafetyNet/Play Integrity), our app operates **reactively**. When the user taps a Reels tab:
+   * Instagram begins drawing its initial frame buffer.
+   * The Android `WindowManager` posts an `AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED` or `TYPE_WINDOW_CONTENT_CHANGED`.
+   * Our 120ms debouncer processes the event, parses the accessibility tree, and triggers `InterventionActivity`.
+   * This leaves an unavoidable, non-zero window (~100–150ms) where the user might see a brief fraction-of-a-second flash of the video before the block screen appears.
+
+2. **Why a "Clean Custom Instagram Remake" Cannot Be Built Safely**:
+   * **No Public Personal API**: Meta only exposes the Instagram Graph API for business marketing accounts. There is no official API for personal direct messages, user stories, or following feed endpoints.
+   * **Aggressive Device Fingerprinting**: Meta uses custom encrypted binary protocols over MQTT/GraphQL with TLS fingerprinting (JA3/JA4), automated challenge checks (SMS/selfie verification), and account risk scoring. Unofficial clients (e.g. reverse-engineered clones or modded APKs like Instander) frequently trigger automated security checkpoints and account bans.
+   * **Conclusion**: Working as an external observer around the legitimate Google Play Store client is the **only architecture that guarantees 100% account safety and zero risk of suspension**, despite the inherent constraint of being an external layer.
+
+3. **Fail-Open Safe Fallback Strategy**:
+   If an Instagram A/B test modifies component view IDs or structure such that `ScreenClassifier` confidence drops below `0.60`, the system classifies the screen as `UNKNOWN` and defaults to `ALLOW`. This intentional fail-open design guarantees that legitimate emergency communications or time-sensitive direct messages are never mistakenly obstructed by false positives.
+
