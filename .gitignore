@@ -1,0 +1,14 @@
+# Built application files
+*.apk.idsig
+app/build/
+build/
+.gradle/
+
+# Local configuration
+local.properties
+.idea/
+*.iml
+.DS_Store
+
+# Temporary / Scratch
+scratch/

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Instagram Focus</string>
+    <string name="accessibility_service_name">Instagram Focus Filter</string>
+    <string name="accessibility_service_description">Protects your attention by detecting and blocking infinite scrolling, Reels, and Explore pages inside Instagram while keeping your Direct Messages and Stories fully accessible.</string>
+    <string name="notification_service_name">Instagram Focus Notification Filter</string>
+    <string name="notification_service_description">Filters distracting entertainment notifications from Instagram while keeping direct messages, story mentions, and follow requests intact.</string>
+</resources>

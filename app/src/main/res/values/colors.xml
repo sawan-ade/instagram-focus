@@ -1,0 +1,11 @@
+<resources>
+    <color name="primary">#0F172A</color>
+    <color name="primary_variant">#1E293B</color>
+    <color name="accent">#3B82F6</color>
+    <color name="background_dark">#090D16</color>
+    <color name="surface_dark">#131B2E</color>
+    <color name="text_primary_dark">#F8FAFC</color>
+    <color name="text_secondary_dark">#94A3B8</color>
+    <color name="allowed_green">#10B981</color>
+    <color name="blocked_red">#EF4444</color>
+</resources>
