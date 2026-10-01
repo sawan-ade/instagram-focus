@@ -11,17 +11,23 @@
 
 It runs locally on your phone alongside the official Instagram app (`com.instagram.android`). It doesn't replace the app, hijack your session, or touch your account credentials. Instead, it uses Android's Accessibility framework to identify when an infinite-scrolling feed is active and steps in with a calm, non-punitive intervention screen.
 
----
-
-## 📸 App Screenshots
-
-| Dashboard Hub | Calm Intervention | Allowed Features | Blocked Distractions | Permissions Setup |
-| :---: | :---: | :---: | :---: | :---: |
-| <img src="docs/screenshots/dashboard.jpg" width="190" alt="Dashboard Hub" /> | <img src="docs/screenshots/intervention.jpg" width="190" alt="Calm Intervention" /> | <img src="docs/screenshots/onboarding-allowed.jpg" width="190" alt="Allowed Features" /> | <img src="docs/screenshots/onboarding-blocked.jpg" width="190" alt="Blocked Distractions" /> | <img src="docs/screenshots/onboarding-permissions.jpg" width="190" alt="Permissions Setup" /> |
+<p align="center">
+  <img src="docs/screenshots/dashboard.jpg" width="260" alt="Instagram Focus Dashboard Hub" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="docs/screenshots/intervention.jpg" width="260" alt="Calm Intervention Screen" />
+</p>
 
 ---
 
 ## Allowed vs. Blocked Surfaces
+
+The app actively differentiates intentional social communication from algorithmic consumption loops:
+
+<p align="center">
+  <img src="docs/screenshots/onboarding-allowed.jpg" width="260" alt="Allowed Features" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="docs/screenshots/onboarding-blocked.jpg" width="260" alt="Blocked Distractions" />
+</p>
 
 | ✅ Allowed (Communication) | ❌ Blocked (Algorithmic Traps) |
 | :--- | :--- |
@@ -58,7 +64,11 @@ Download the pre-compiled, signed APK from the [Releases](https://github.com/saw
 
 Transfer it to your phone via USB, WhatsApp, or Google Drive, and tap to install.
 
-### 2. Unlocking "Restricted Settings" (Android 13, 14, 15 & 16)
+### 2. Permissions & Unlocking "Restricted Settings" (Android 13, 14, 15 & 16)
+
+<p align="center">
+  <img src="docs/screenshots/onboarding-permissions.jpg" width="260" alt="Permissions Setup Screen" />
+</p>
 
 On modern Android versions (including Realme UI, Pixel, Samsung One UI, and ColorOS), Android automatically greys out the Accessibility toggle for sideloaded apps as a security precaution. To unlock it:
 
@@ -69,9 +79,8 @@ On modern Android versions (including Realme UI, Pixel, Samsung One UI, and Colo
 
 ---
 
-## First-Run Experience & Controls
+## Core Controls & Features
 
-* **Onboarding**: A 4-step introduction explaining the philosophy, allowed tools, blocked surfaces, and why each permission is needed.
 * **Master Switch**: Toggle Focus Mode ON/OFF at any time. Turning it off displays an optional reflection prompt (*"Why are you pausing focus?"*) with an option to take a 10-minute break instead.
 * **Temporary Bypass**: Quickly pause restrictions for `5 min`, `10 min`, or `30 min` when you need to check something specific. A live countdown shows when protection resumes.
 * **Direct DM Launcher**: Tap `Open Direct Messages Directly` to deep-link directly into your inbox (`instagram://direct_inbox`), bypassing the feed entirely.
