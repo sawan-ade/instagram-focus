@@ -13,6 +13,14 @@ It runs locally on your phone alongside the official Instagram app (`com.instagr
 
 ---
 
+## 📸 App Screenshots
+
+| Dashboard Hub | Calm Intervention | Allowed Features | Blocked Distractions | Permissions Setup |
+| :---: | :---: | :---: | :---: | :---: |
+| <img src="docs/screenshots/dashboard.jpg" width="190" alt="Dashboard Hub" /> | <img src="docs/screenshots/intervention.jpg" width="190" alt="Calm Intervention" /> | <img src="docs/screenshots/onboarding-allowed.jpg" width="190" alt="Allowed Features" /> | <img src="docs/screenshots/onboarding-blocked.jpg" width="190" alt="Blocked Distractions" /> | <img src="docs/screenshots/onboarding-permissions.jpg" width="190" alt="Permissions Setup" /> |
+
+---
+
 ## Allowed vs. Blocked Surfaces
 
 | ✅ Allowed (Communication) | ❌ Blocked (Algorithmic Traps) |
